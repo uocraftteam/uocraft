@@ -1,5 +1,7 @@
 {
   "itemGroup.uocraft": "Example Mod Tab",
   "block.uocraft.eii_block": "EII Block",
-  "item.uocraft.example_item": "Example Item"
+  "item.uocraft.example_item": "Example Item",
+  "item.uocraft.demasiado_java.desc": "The Java Song",
+  "item.uocraft.music_disk_demasiado_java": "Demasiado Java"
 }

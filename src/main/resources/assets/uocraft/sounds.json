@@ -1,0 +1,11 @@
+{
+  "demasiado_java": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "uocraft:demasiado_java",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -26,5 +26,6 @@ public class Uocraft {
 
         ModBlocks.registerBlocks(modEventBus);
         ModItems.registerItems(modEventBus);
+        ModSounds.registerSounds(modEventBus);
     }
 }

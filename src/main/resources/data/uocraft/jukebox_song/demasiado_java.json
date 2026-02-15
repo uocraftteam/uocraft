@@ -1,0 +1,8 @@
+{
+  "sound_event": "uocraft:demasiado_java",
+  "description": {
+    "translate": "item.uocraft.music_disk_demasiado_java"
+  },
+  "length_in_seconds": 195.0,
+  "comparator_output": 15
+}
