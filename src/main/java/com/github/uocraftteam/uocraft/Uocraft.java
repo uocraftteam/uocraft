@@ -1,6 +1,7 @@
 package com.github.uocraftteam.uocraft;
 
 import com.github.uocraftteam.uocraft.block.ModBlocks;
+import com.github.uocraftteam.uocraft.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -23,6 +24,7 @@ public class Uocraft {
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-        ModBlocks.register(modEventBus);
+        ModBlocks.registerBlocks(modEventBus);
+        ModItems.registerItems(modEventBus);
     }
 }
