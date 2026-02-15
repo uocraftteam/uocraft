@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModBlocks {
-    public static DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Uocraft.MODID);
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Uocraft.MODID);
 
     public static final DeferredBlock<Block> EII_BLOCK = BLOCKS.register("eii_block", registryName -> new Block(
             BlockBehaviour.Properties.of()
