@@ -1,4 +1,5 @@
 {
   "itemGroup.uocraft": "Example Mod Tab",
-  "block.uocraft.eii_block": "EII Block"
+  "block.uocraft.eii_block": "EII Block",
+  "item.uocraft.example_item": "Example Item"
 }
