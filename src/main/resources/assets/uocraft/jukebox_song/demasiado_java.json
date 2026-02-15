@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.uocraft.demasiado_java.desc"
+  },
+  "length_in_seconds": 195.0,
+  "sound_event": "uocraft:demasiado_java"
+}
