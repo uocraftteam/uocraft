@@ -3,6 +3,9 @@ package com.github.uocraftteam.uocraft.block.custom;
 import com.github.uocraftteam.uocraft.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -12,6 +15,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -25,9 +29,9 @@ import org.jspecify.annotations.Nullable;
 
 public class ComputerBlock extends Block {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty MOUSE =  BooleanProperty.create("mouse");
-    public static final BooleanProperty KEYBOARD =  BooleanProperty.create("keyboard");
-    public static final BooleanProperty MONITOR  =  BooleanProperty.create("monitor");
+    public static final BooleanProperty MOUSE = BooleanProperty.create("mouse");
+    public static final BooleanProperty KEYBOARD = BooleanProperty.create("keyboard");
+    public static final BooleanProperty MONITOR = BooleanProperty.create("monitor");
 
     public static final VoxelShape SHAPE_NORTH = Shapes.or(
             Block.box(10.0, 0.0, 1.0, 16.0, 12.0, 15.0)
@@ -96,8 +100,44 @@ public class ComputerBlock extends Block {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if state.getValue(MOUSE)
+        if (!level.isClientSide()) {
+            if (state.getValue(MOUSE)) {
+                ItemStack mouseToDrop = new ItemStack(ModItems.MOUSE.get());
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), mouseToDrop);
+                level.setBlock(pos, state.setValue(MOUSE, false), Block.UPDATE_ALL);
+                level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
 
-        return super.useWithoutItem(state, level, pos, player, hitResult);
+            else if (state.getValue(KEYBOARD)) {
+                ItemStack mouseToDrop = new ItemStack(ModItems.KEYBOARD.get());
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), mouseToDrop);
+                level.setBlock(pos, state.setValue(KEYBOARD, false), Block.UPDATE_ALL);
+                level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            else if (state.getValue(MONITOR)) {
+                ItemStack mouseToDrop = new ItemStack(ModItems.MONITOR.get());
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), mouseToDrop);
+                level.setBlock(pos, state.setValue(MONITOR, false), Block.UPDATE_ALL);
+                level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
+        if (!level.isClientSide()) {
+            if (state.getValue(ComputerBlock.KEYBOARD)) {
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.MONITOR.get()));
+            }
+            if (state.getValue(ComputerBlock.MOUSE)) {
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.MOUSE.get()));
+            }
+            if (state.getValue(ComputerBlock.MONITOR)) {
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.MONITOR.get()));
+            }
+        }
+        super.playerDestroy(level, player, pos, state, blockEntity, tool);
     }
 }
