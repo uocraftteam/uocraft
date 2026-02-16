@@ -1,6 +1,7 @@
 package com.github.uocraftteam.uocraft.block;
 
 import com.github.uocraftteam.uocraft.Uocraft;
+import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -26,6 +27,15 @@ public class ModBlocks {
                     .sound(SoundType.STONE)
                     .lightLevel(state -> 0)
     ));
+    public static final DeferredBlock<Block> COMPUTER = registerBlock("computer",
+            identifier -> new ComputerBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, identifier))
+                    .destroyTime(1.5f)
+                    .explosionResistance(6.0f)
+                    .sound(SoundType.STONE)
+                    .lightLevel(state -> 2)
+                    .noOcclusion()
+            ));
 
     private static DeferredBlock<@NotNull Block> registerBlock(String name, Function<Identifier, ? extends Block> func){
         DeferredBlock<@NotNull Block> block =  BLOCKS.register(name, func);
