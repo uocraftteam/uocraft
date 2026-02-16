@@ -1,0 +1,45 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "uocraft:block/computer_texture",
+		"particle": "uocraft:block/computer_texture"
+	},
+	"elements": [
+		{
+			"from": [9, 0, 12],
+			"to": [11, 2, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 0, 12]},
+			"faces": {
+				"north": {"uv": [11, 6, 12, 7], "texture": "#0"},
+				"east": {"uv": [12, 2, 12.5, 3], "texture": "#0"},
+				"south": {"uv": [10, 11, 11, 12], "texture": "#0"},
+				"west": {"uv": [12, 3, 12.5, 4], "texture": "#0"},
+				"up": {"uv": [13, 4.5, 12, 4], "texture": "#0"},
+				"down": {"uv": [13, 4.5, 12, 5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 2, 11],
+			"to": [15, 9, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 2, 11]},
+			"faces": {
+				"north": {"uv": [6, 0, 11, 3.5], "texture": "#0"},
+				"east": {"uv": [4, 10, 5, 13.5], "texture": "#0"},
+				"south": {"uv": [6, 3.5, 11, 7], "texture": "#0"},
+				"west": {"uv": [5, 10, 6, 13.5], "texture": "#0"},
+				"up": {"uv": [15, 11, 10, 10], "texture": "#0"},
+				"down": {"uv": [16, 0, 11, 1], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "monitor",
+			"origin": [9, 2, 11],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

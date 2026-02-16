@@ -1,0 +1,25 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "uocraft:block/computer_texture",
+		"particle": "uocraft:block/computer_texture"
+	},
+	"elements": [
+		{
+			"name": "mouse",
+			"from": [5, 0, 3],
+			"to": [7, 1, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 0, 5]},
+			"faces": {
+				"north": {"uv": [12, 6, 13, 6.5], "texture": "#0"},
+				"east": {"uv": [11, 11, 13, 11.5], "texture": "#0"},
+				"south": {"uv": [12, 6.5, 13, 7], "texture": "#0"},
+				"west": {"uv": [11, 11.5, 13, 12], "texture": "#0"},
+				"up": {"uv": [12, 3, 11, 1], "texture": "#0"},
+				"down": {"uv": [12, 3, 11, 5], "texture": "#0"}
+			}
+		}
+	]
+}

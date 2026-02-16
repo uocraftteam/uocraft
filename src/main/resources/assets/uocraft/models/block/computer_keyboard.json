@@ -1,0 +1,25 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "uocraft:block/computer_texture",
+		"particle": "uocraft:block/computer_texture"
+	},
+	"elements": [
+		{
+			"name": "keyboard",
+			"from": [8, 0, 4],
+			"to": [15, 1, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 0, 4]},
+			"faces": {
+				"north": {"uv": [11, 5, 14.5, 5.5], "texture": "#0"},
+				"east": {"uv": [12, 1, 13.5, 1.5], "texture": "#0"},
+				"south": {"uv": [11, 5.5, 14.5, 6], "texture": "#0"},
+				"west": {"uv": [12, 1.5, 13.5, 2], "texture": "#0"},
+				"up": {"uv": [13.5, 8.5, 10, 7], "texture": "#0"},
+				"down": {"uv": [13.5, 8.5, 10, 10], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -17,6 +18,9 @@ import org.jspecify.annotations.Nullable;
 
 public class ComputerBlock extends Block {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty MOUSE =  BooleanProperty.create("mouse");
+    public static final BooleanProperty KEYBOARD =  BooleanProperty.create("keyboard");
+    public static final BooleanProperty MONITOR  =  BooleanProperty.create("monitor");
 
     public static final VoxelShape SHAPE_NORTH = Shapes.or(
             Block.box(10.0, 0.0, 1.0, 16.0, 12.0, 15.0)
@@ -27,17 +31,26 @@ public class ComputerBlock extends Block {
         super(properties);
         this.registerDefaultState(getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH)
+                .setValue(MOUSE, false)
+                .setValue(KEYBOARD, false)
+                .setValue(MONITOR, false)
         );
     }
 
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING).add(MOUSE).add(KEYBOARD).add(MONITOR);
     }
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, Direction.NORTH);
+
+        return this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(MOUSE, false)
+                .setValue(KEYBOARD, false)
+                .setValue(MONITOR, false);
     }
 
     @Override
@@ -45,8 +58,4 @@ public class ComputerBlock extends Block {
         return SHAPE_NORTH;
     }
 
-    @Override
-    protected RenderShape getRenderShape(BlockState state) {
-        return RenderShape.INVISIBLE;
-    }
 }
