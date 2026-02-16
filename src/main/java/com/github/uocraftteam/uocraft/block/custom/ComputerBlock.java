@@ -1,9 +1,15 @@
 package com.github.uocraftteam.uocraft.block.custom;
 
+import com.github.uocraftteam.uocraft.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,6 +17,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -58,4 +65,39 @@ public class ComputerBlock extends Block {
         return SHAPE_NORTH;
     }
 
+    @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!level.isClientSide() && stack.is(ModItems.KEYBOARD.get())) {
+            level.setBlock(pos, state.setValue(KEYBOARD, true), Block.UPDATE_ALL);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        if (!level.isClientSide() && stack.is(ModItems.MOUSE.get())) {
+            level.setBlock(pos, state.setValue(MOUSE, true), Block.UPDATE_ALL);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        if (!level.isClientSide() && stack.is(ModItems.MONITOR.get())) {
+            level.setBlock(pos, state.setValue(MONITOR, true), Block.UPDATE_ALL);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if state.getValue(MOUSE)
+
+        return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
 }
