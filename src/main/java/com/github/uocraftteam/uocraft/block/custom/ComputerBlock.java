@@ -34,7 +34,11 @@ public class ComputerBlock extends Block {
     public static final BooleanProperty MONITOR = BooleanProperty.create("monitor");
 
     public static final VoxelShape SHAPE_NORTH = Shapes.or(
-            Block.box(10.0, 0.0, 1.0, 16.0, 12.0, 15.0)
+            Block.box(0.0,0.0, 2.0, 4.0, 10.0, 14.0)
+    );
+    public static final VoxelShape SHAPE_NORTH_MONITOR = Shapes.or(
+            Block.box(0.0,0.0, 2.0, 4.0, 10.0, 14.0),
+            Block.box(5.0, 2.0, 11.0, 15.0, 9.0, 13.0)
     );
 
 
@@ -66,6 +70,9 @@ public class ComputerBlock extends Block {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (state.getValue(MONITOR)) {
+            return SHAPE_NORTH_MONITOR;
+        }
         return SHAPE_NORTH;
     }
 
