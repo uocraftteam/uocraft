@@ -20,6 +20,18 @@ public class ModItems {
                         .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG,
                         Identifier.fromNamespaceAndPath(Uocraft.MODID, "demasiado_java")))
         );
+    public static final DeferredItem<@NotNull Item> KEYBOARD = ITEMS.registerSimpleItem(
+            "keyboard",
+            properties -> properties);
+
+    public static final DeferredItem<@NotNull Item> MOUSE = ITEMS.registerSimpleItem(
+            "mouse",
+            properties -> properties);
+
+    public static final DeferredItem<@NotNull Item> MONITOR = ITEMS.registerSimpleItem(
+            "monitor",
+            properties -> properties);
+
 
         public static void registerItems(IEventBus eventBus) {
             ITEMS.register(eventBus);

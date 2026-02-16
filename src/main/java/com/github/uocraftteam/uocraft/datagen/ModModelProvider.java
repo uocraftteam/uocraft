@@ -40,6 +40,10 @@ public class ModModelProvider extends ModelProvider {
         generateComputerModel(blockModels);
 
         itemModels.generateFlatItem(ModItems.MUSIC_DISK_DEMASIADO_JAVA.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.KEYBOARD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.MOUSE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.MONITOR.get(), ModelTemplates.FLAT_ITEM);
+
     }
 
     private void generateComputerModel(@NotNull BlockModelGenerators blockModels) {
