@@ -1,6 +1,7 @@
 package com.github.uocraftteam.uocraft;
 
 import com.github.uocraftteam.uocraft.block.ModBlocks;
+import com.github.uocraftteam.uocraft.item.ModCreativeModTabs;
 import com.github.uocraftteam.uocraft.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -27,5 +28,6 @@ public class Uocraft {
         ModBlocks.registerBlocks(modEventBus);
         ModItems.registerItems(modEventBus);
         ModSounds.registerSounds(modEventBus);
+        ModCreativeModTabs.registerCreativeModeTabs(modEventBus);
     }
 }
