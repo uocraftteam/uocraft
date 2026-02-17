@@ -14,7 +14,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,6 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 public class ComputerBlock extends Block {
@@ -37,9 +37,31 @@ public class ComputerBlock extends Block {
             Block.box(0.0,0.0, 2.0, 4.0, 10.0, 14.0)
     );
     public static final VoxelShape SHAPE_NORTH_MONITOR = Shapes.or(
-            Block.box(0.0,0.0, 2.0, 4.0, 10.0, 14.0),
+            SHAPE_NORTH,
             Block.box(5.0, 2.0, 11.0, 15.0, 9.0, 13.0)
     );
+    public static final VoxelShape SHAPE_WEST = Shapes.or(
+            Block.box(2.0,0.0, 12.0, 14.0, 10.0, 16.0)
+    );
+    public static final VoxelShape SHAPE_WEST_MONITOR = Shapes.or(
+            SHAPE_WEST,
+            Block.box(11.0, 2.0, 1.0, 13.0, 9.0, 11.0)
+    );
+    public static final VoxelShape SHAPE_SOUTH = Shapes.or(
+            Block.box(12.0,0.0, 2.0, 16.0, 10.0, 14.0)
+    );
+    public static final VoxelShape SHAPE_SOUTH_MONITOR = Shapes.or(
+            SHAPE_SOUTH,
+            Block.box(1.0, 2.0, 3.0, 11.0, 9.0, 5.0)
+    );
+    public static final VoxelShape SHAPE_EAST = Shapes.or(
+            Block.box(2.0,0.0, 0.0, 14.0, 10.0, 4.0)
+    );
+    public static final VoxelShape SHAPE_EAST_MONITOR = Shapes.or(
+            SHAPE_EAST,
+            Block.box(3.0, 2.0, 5.0, 5.0, 9.0, 15.0)
+    );
+
 
 
     public ComputerBlock(Properties properties) {
@@ -69,11 +91,13 @@ public class ComputerBlock extends Block {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (state.getValue(MONITOR)) {
-            return SHAPE_NORTH_MONITOR;
-        }
-        return SHAPE_NORTH;
+    protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(FACING)) {
+            case WEST  -> state.getValue(MONITOR) ? SHAPE_WEST_MONITOR  : SHAPE_WEST;
+            case EAST  -> state.getValue(MONITOR) ? SHAPE_EAST_MONITOR  : SHAPE_EAST;
+            case SOUTH -> state.getValue(MONITOR) ? SHAPE_SOUTH_MONITOR : SHAPE_SOUTH;
+            default    -> state.getValue(MONITOR) ? SHAPE_NORTH_MONITOR : SHAPE_NORTH;
+        };
     }
 
     @Override
