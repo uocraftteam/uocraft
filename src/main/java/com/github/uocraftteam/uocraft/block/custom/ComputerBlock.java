@@ -102,7 +102,7 @@ public class ComputerBlock extends Block {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide() && stack.is(ModItems.KEYBOARD.get())) {
+        if (!level.isClientSide() && stack.is(ModItems.KEYBOARD.get()) && !state.getValue(KEYBOARD)) {
             level.setBlock(pos, state.setValue(KEYBOARD, true), Block.UPDATE_ALL);
             if (!player.isCreative()) {
                 stack.shrink(1);
@@ -110,7 +110,7 @@ public class ComputerBlock extends Block {
             return InteractionResult.SUCCESS;
         }
 
-        if (!level.isClientSide() && stack.is(ModItems.MOUSE.get())) {
+        if (!level.isClientSide() && stack.is(ModItems.MOUSE.get()) && !state.getValue(MOUSE)) {
             level.setBlock(pos, state.setValue(MOUSE, true), Block.UPDATE_ALL);
             if (!player.isCreative()) {
                 stack.shrink(1);
@@ -118,7 +118,7 @@ public class ComputerBlock extends Block {
             return InteractionResult.SUCCESS;
         }
 
-        if (!level.isClientSide() && stack.is(ModItems.MONITOR.get())) {
+        if (!level.isClientSide() && stack.is(ModItems.MONITOR.get()) && !state.getValue(MONITOR)) {
             level.setBlock(pos, state.setValue(MONITOR, true), Block.UPDATE_ALL);
             if (!player.isCreative()) {
                 stack.shrink(1);
@@ -160,7 +160,7 @@ public class ComputerBlock extends Block {
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
         if (!level.isClientSide()) {
             if (state.getValue(ComputerBlock.KEYBOARD)) {
-                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.MONITOR.get()));
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.KEYBOARD.get()));
             }
             if (state.getValue(ComputerBlock.MOUSE)) {
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.MOUSE.get()));
