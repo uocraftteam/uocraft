@@ -1,7 +1,15 @@
-// 1.21.11	2026-02-16T15:32:24.3100633	Model Definitions - uocraft
-6fd009dafe6869ae28fdc16a67950653ef1b7eb9 assets/uocraft/blockstates/computer.json
+// 1.21.11	2026-02-17T11:01:38.6671819	Model Definitions - uocraft
+3a7367cda1a7c0fec1dde1e4e8388ad18e47dd56 assets/uocraft/blockstates/computer.json
 4f509651dd370c766dc9e0a973cce155a798eb94 assets/uocraft/blockstates/eii_block.json
+89061ea979c0c378681bdbfa3c9ac4d6401cef68 assets/uocraft/items/coffee.json
 b2a4216894040a0a26449c34ab248f394fc93305 assets/uocraft/items/computer.json
 6b7f76e9a2c19933e6869e4720bf162fa44e9e23 assets/uocraft/items/eii_block.json
+84a51dd6852bc6226c2944d87cc322ca5b2369e4 assets/uocraft/items/keyboard.json
+7188a181fc5beb8cbdf43df3ebf2aceba76858a8 assets/uocraft/items/monitor.json
+b04cc24b18cf00594f762d3caae11731661bd96e assets/uocraft/items/mouse.json
 d298b3a00670d87aa716afd06a662b01a64e7601 assets/uocraft/items/music_disk_demasiado_java.json
+23395dc1ec3d5adce5736528bc0a0799798b2693 assets/uocraft/models/item/coffee.json
+4603bb6be7ccdac4c6a1edd5bca1116a1a3e038f assets/uocraft/models/item/keyboard.json
+f838f78e5da61f26b5fc7774c60f4b10c6c74e86 assets/uocraft/models/item/monitor.json
+b36453d5e74f77a7bf71a34a99aa14b2e1c8df07 assets/uocraft/models/item/mouse.json
 2d60e25c831e795f4591cdeed5ecfa5827847245 assets/uocraft/models/item/music_disk_demasiado_java.json
