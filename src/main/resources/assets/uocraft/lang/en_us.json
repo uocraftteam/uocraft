@@ -1,7 +1,12 @@
 {
-  "itemGroup.uocraft": "Example Mod Tab",
   "block.uocraft.eii_block": "EII Block",
-  "item.uocraft.example_item": "Example Item",
+  "block.uocraft.computer": "Computer",
+
+  "item.uocraft.keyboard": "Keyboard",
+  "item.uocraft.mouse": "Mouse",
+  "item.uocraft.monitor": "Monitor",
+  "item.uocraft.coffee": "Coffee",
+
   "item.uocraft.demasiado_java.desc": "The Java Song",
   "item.uocraft.music_disk_demasiado_java": "Demasiado Java"
 }

@@ -1,0 +1,12 @@
+{
+  "block.uocraft.eii_block": "Bloque de EII",
+  "block.uocraft.computer": "Ordenador",
+
+  "item.uocraft.keyboard": "Teclado",
+  "item.uocraft.mouse": "Ratón",
+  "item.uocraft.monitor": "Monitor",
+  "item.uocraft.coffee": "Café",
+
+  "item.uocraft.demasiado_java.desc": "La Canción de Java",
+  "item.uocraft.music_disk_demasiado_java": "Demasiado Java"
+}
