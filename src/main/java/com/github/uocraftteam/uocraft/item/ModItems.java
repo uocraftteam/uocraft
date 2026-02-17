@@ -32,8 +32,12 @@ public class ModItems {
             "monitor",
             properties -> properties);
 
+    public static final DeferredItem<@NotNull Item> COFFEE = ITEMS.registerSimpleItem(
+            "coffee",
+            properties -> properties);
 
-        public static void registerItems(IEventBus eventBus) {
+
+    public static void registerItems(IEventBus eventBus) {
             ITEMS.register(eventBus);
         }
 }

@@ -25,6 +25,8 @@ public class ModCreativeModTabs {
                                 output.accept(ModItems.KEYBOARD);
                                 output.accept(ModItems.MONITOR);
                                 output.accept(ModItems.MOUSE);
+                                output.accept(ModItems.COFFEE);
+                                output.accept(ModItems.MUSIC_DISK_DEMASIADO_JAVA);
                                 output.accept(ModBlocks.COMPUTER);
                                 output.accept(ModBlocks.EII_BLOCK);
                             })
