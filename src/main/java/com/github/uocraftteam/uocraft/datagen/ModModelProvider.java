@@ -43,7 +43,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.KEYBOARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.MOUSE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.MONITOR.get(), ModelTemplates.FLAT_ITEM);
-
+        itemModels.generateFlatItem(ModItems.COFFEE.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private void generateComputerModel(@NotNull BlockModelGenerators blockModels) {
