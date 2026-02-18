@@ -29,6 +29,7 @@ public class ModCreativeModTabs {
                                 output.accept(ModItems.MUSIC_DISK_DEMASIADO_JAVA);
                                 output.accept(ModBlocks.COMPUTER);
                                 output.accept(ModBlocks.EII_BLOCK);
+                                output.accept(ModBlocks.GREEN_SEMINAR_TABLE);
                             })
                     .build()
     );

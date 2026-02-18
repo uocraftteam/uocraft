@@ -2,13 +2,17 @@ package com.github.uocraftteam.uocraft.block;
 
 import com.github.uocraftteam.uocraft.Uocraft;
 import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
+import com.github.uocraftteam.uocraft.block.custom.TableBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -33,10 +37,19 @@ public class ModBlocks {
                     .destroyTime(1.5f)
                     .explosionResistance(6.0f)
                     .sound(SoundType.STONE)
-                    .lightLevel(state -> 2)
+                    .lightLevel(state -> state.getValue(ComputerBlock.KEYBOARD) && state.getValue(ComputerBlock.MOUSE) && state.getValue(ComputerBlock.MONITOR)? 2 : 0)
                     .noOcclusion()
             ));
 
+    public static final DeferredBlock<Block> GREEN_SEMINAR_TABLE = registerBlock("green_seminar_table",
+            identifier -> new TableBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, identifier))
+                    .destroyTime(1.0f)
+                    .explosionResistance(3.0f)
+                    .sound(SoundType.WOOD)
+                    .lightLevel(state -> 2)
+                    .noOcclusion()
+            ));
     private static DeferredBlock<@NotNull Block> registerBlock(String name, Function<Identifier, ? extends Block> func){
         DeferredBlock<@NotNull Block> block =  BLOCKS.register(name, func);
         registerBlockItem(name, block);

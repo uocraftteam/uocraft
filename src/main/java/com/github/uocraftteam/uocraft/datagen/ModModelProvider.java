@@ -11,6 +11,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.client.renderer.block.model.Variant;
@@ -36,6 +37,7 @@ public class ModModelProvider extends ModelProvider {
                 BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(eii_block, blockModels.modelOutput))));
 
         generateComputerModel(blockModels);
+        generateTableModels(blockModels);
 
         itemModels.generateFlatItem(ModItems.MUSIC_DISK_DEMASIADO_JAVA.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KEYBOARD.get(), ModelTemplates.FLAT_ITEM);
@@ -86,6 +88,27 @@ public class ModModelProvider extends ModelProvider {
         }
 
         blockModels.blockStateOutput.accept(computer_generator);
+    }
+
+    private void generateTableModels(BlockModelGenerators blockModels) {
+        Block green_seminar_table = ModBlocks.GREEN_SEMINAR_TABLE.get();
+
+        Identifier green_seminar_modelLoc = this.modLocation("block/green_seminar_table");
+
+        Variant variant = new Variant(green_seminar_modelLoc);
+
+        MultiVariantGenerator green_seminar_table_generator = MultiVariantGenerator.dispatch(
+                green_seminar_table,
+                BlockModelGenerators.variant(variant)
+        ).with(
+                PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+                        .select(Direction.NORTH, BlockModelGenerators.NOP)
+                        .select(Direction.EAST,  BlockModelGenerators.Y_ROT_90)
+                        .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
+                        .select(Direction.WEST,  BlockModelGenerators.Y_ROT_270)
+        );
+
+        blockModels.blockStateOutput.accept(green_seminar_table_generator);
     }
 
     public static MultiVariantGenerator createSimpleBlock(Block block, MultiVariant variants) {

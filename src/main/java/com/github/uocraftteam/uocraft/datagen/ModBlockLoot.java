@@ -20,6 +20,7 @@ public class ModBlockLoot extends BlockLootSubProvider {
     protected void generate() {
         this.dropSelf(ModBlocks.EII_BLOCK.get());
         this.dropSelf(ModBlocks.COMPUTER.get());
+        this.dropSelf(ModBlocks.GREEN_SEMINAR_TABLE.get());
     }
     @Override
     protected @NonNull Iterable<Block> getKnownBlocks() {
