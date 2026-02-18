@@ -4,12 +4,15 @@ import com.github.uocraftteam.uocraft.Uocraft;
 import com.github.uocraftteam.uocraft.block.ModBlocks;
 import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
+import com.google.errorprone.annotations.Var;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.core.Direction;
@@ -29,13 +32,8 @@ public class ModModelProvider extends ModelProvider {
     protected void registerModels(@NotNull BlockModelGenerators blockModels, @NotNull ItemModelGenerators itemModels) {
 
         Block eii_block = ModBlocks.EII_BLOCK.get();
-        Identifier eii_block_modelLoc = this.modLocation("block/eii_block");
-        blockModels.blockStateOutput.accept(
-                MultiVariantGenerator.dispatch(
-                        eii_block,
-                        BlockModelGenerators.variant(new Variant(eii_block_modelLoc))
-                )
-        );
+        blockModels.blockStateOutput.accept(createSimpleBlock(eii_block,
+                BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(eii_block, blockModels.modelOutput))));
 
         generateComputerModel(blockModels);
 
@@ -88,6 +86,10 @@ public class ModModelProvider extends ModelProvider {
         }
 
         blockModels.blockStateOutput.accept(computer_generator);
+    }
+
+    public static MultiVariantGenerator createSimpleBlock(Block block, MultiVariant variants) {
+        return MultiVariantGenerator.dispatch(block, variants);
     }
 
     private VariantMutator getRotationMutator(Direction dir) {
