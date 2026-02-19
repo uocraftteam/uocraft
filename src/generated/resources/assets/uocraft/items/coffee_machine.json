@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "uocraft:item/coffee_machine"
+    "model": "uocraft:block/coffee_machine"
   }
 }
