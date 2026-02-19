@@ -1,8 +1,12 @@
 package com.github.uocraftteam.uocraft.block.custom;
 
+import com.github.uocraftteam.uocraft.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
 public class CoffeeMachineBlock extends Block {
@@ -48,7 +53,7 @@ public class CoffeeMachineBlock extends Block {
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        level.setBlockAndUpdate(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER));
+        level.setBlockAndUpdate(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(COFFEES_REMAINING, 5));
     }
 
     @Override
@@ -83,7 +88,7 @@ public class CoffeeMachineBlock extends Block {
         this.registerDefaultState(getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, DoubleBlockHalf.LOWER)
-                .setValue(COFFEES_REMAINING, 5));
+                .setValue(COFFEES_REMAINING, 0));
     }
 
     protected static void preventDropFromBottomPart(Level level, BlockPos pos, BlockState state, Player player) {
@@ -96,6 +101,36 @@ public class CoffeeMachineBlock extends Block {
                 level.setBlock(blockpos, blockstate1, 35);
                 level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
             }
+        }
+    }
+
+    @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        return use(stack, state, level, pos, hitResult);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        return use(ItemStack.EMPTY, state, level, pos, hitResult);
+    }
+
+    protected InteractionResult use(ItemStack stack, BlockState state, Level level, BlockPos pos, BlockHitResult hitResult) {
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        if (state.getValue(this.COFFEES_REMAINING) > 0) {
+            level.setBlock(pos, state.setValue(COFFEES_REMAINING, state.getValue(COFFEES_REMAINING) - 1), 3);
+            Direction direction = state.getValue(FACING);
+            BlockPos coffeeDropPos = pos.relative(direction);
+            Containers.dropItemStack(level,
+                    coffeeDropPos.getX(),
+                    coffeeDropPos.getY(),
+                    coffeeDropPos.getZ(),
+                    new ItemStack(ModItems.COFFEE.get())
+                    );
+            return InteractionResult.SUCCESS;
+        } else {
+            return InteractionResult.PASS;
         }
     }
 }

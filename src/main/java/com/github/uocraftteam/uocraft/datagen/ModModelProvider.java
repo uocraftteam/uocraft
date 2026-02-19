@@ -2,28 +2,33 @@ package com.github.uocraftteam.uocraft.datagen;
 
 import com.github.uocraftteam.uocraft.Uocraft;
 import com.github.uocraftteam.uocraft.block.ModBlocks;
+import com.github.uocraftteam.uocraft.block.custom.CoffeeMachineBlock;
 import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
 import com.google.errorprone.annotations.Var;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.*;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.core.ClientAsset;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.random.Weighted;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.NotNull;
 
 public class ModModelProvider extends ModelProvider {
+    BlockModelGenerators blockModels;
+    ItemModelGenerators itemModels;
 
     public ModModelProvider(PackOutput output) {
         super(output, Uocraft.MODID);
@@ -31,16 +36,18 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(@NotNull BlockModelGenerators blockModels, @NotNull ItemModelGenerators itemModels) {
+        this.blockModels = blockModels;
+        this.itemModels = itemModels;
 
         Block eii_block = ModBlocks.EII_BLOCK.get();
         blockModels.blockStateOutput.accept(createSimpleBlock(eii_block,
                 BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(eii_block, blockModels.modelOutput))));
-        blockModels.blockStateOutput.accept(createSimpleBlock(ModBlocks.COFFEE_MACHINE.get(),
-                BlockModelGenerators.plainVariant(TexturedModel.CUBE.create(ModBlocks.COFFEE_MACHINE.get(), blockModels.modelOutput))
-                ));
+
+
 
         generateComputerModel(blockModels);
         generateTableModels(blockModels);
+        generateCoffeeMachineModel(blockModels, itemModels);
 
         itemModels.generateFlatItem(ModItems.MUSIC_DISK_DEMASIADO_JAVA.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KEYBOARD.get(), ModelTemplates.FLAT_ITEM);
@@ -48,6 +55,69 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.MONITOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COFFEE.get(), ModelTemplates.FLAT_ITEM);
     }
+
+    private void generateCoffeeMachineModel(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        Block coffeeMachine = ModBlocks.COFFEE_MACHINE.get();
+
+        TextureMapping bottom_mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"))
+                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_bottom"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_bottom"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
+                .put(TextureSlot.UP, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_top"));
+
+        TextureMapping top_mapping = new TextureMapping()
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"))
+                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_bottom"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
+                .put(TextureSlot.UP, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_top"));
+
+        Identifier bottomId = ModelTemplates.CUBE.createWithSuffix(
+                coffeeMachine,
+                "_bottom",
+                bottom_mapping,
+                blockModels.modelOutput
+        );
+        Identifier topId = ModelTemplates.CUBE.createWithSuffix(
+                coffeeMachine,
+                "_top",
+                top_mapping,
+                blockModels.modelOutput
+        );
+
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(
+                        coffeeMachine
+                ).with(PropertyDispatch.initial(CoffeeMachineBlock.COFFEES_REMAINING, CoffeeMachineBlock.HALF)
+                                .select(0, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(1, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(2, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(3, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(4, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(5, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(0, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
+                                .select(1, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
+                                .select(2, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
+                                .select(3, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
+                                .select(4, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
+                                .select(5, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
+
+                ).with(
+                        PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+                                .select(Direction.NORTH, BlockModelGenerators.NOP)
+                                .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
+                                .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
+                                .select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
+                )
+        );
+        registerSimpleFlatItemModel(coffeeMachine.asItem(), itemModels);
+    }
+
 
     private void generateComputerModel(@NotNull BlockModelGenerators blockModels) {
         Block computer = ModBlocks.COMPUTER.get();
@@ -96,9 +166,9 @@ public class ModModelProvider extends ModelProvider {
     private void generateTableModels(BlockModelGenerators blockModels) {
         Block green_seminar_table = ModBlocks.GREEN_SEMINAR_TABLE.get();
 
-        Identifier green_seminar_modelLoc = this.modLocation("block/green_seminar_table");
+        Identifier green_seminar_id = this.modLocation("block/green_seminar_table");
 
-        Variant variant = new Variant(green_seminar_modelLoc);
+        Variant variant = new Variant(green_seminar_id);
 
         MultiVariantGenerator green_seminar_table_generator = MultiVariantGenerator.dispatch(
                 green_seminar_table,
@@ -112,6 +182,7 @@ public class ModModelProvider extends ModelProvider {
         );
 
         blockModels.blockStateOutput.accept(green_seminar_table_generator);
+        generateBlockItem(green_seminar_table, green_seminar_id);
     }
 
     public static MultiVariantGenerator createSimpleBlock(Block block, MultiVariant variants) {
@@ -125,5 +196,22 @@ public class ModModelProvider extends ModelProvider {
             case WEST -> BlockModelGenerators.Y_ROT_270;
             default -> BlockModelGenerators.NOP; // NORTH
         };
+    }
+
+    public void registerSimpleItemModel(Item item, Identifier model, ItemModelOutput output) {
+        output.accept(item, ItemModelUtils.plainModel(model));
+    }
+    public Identifier createFlatItemModel(Item item, ItemModelGenerators generator) {
+        return ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(item), generator.modelOutput);
+    }
+    public void registerSimpleFlatItemModel(Item item, ItemModelGenerators generator) {
+        this.registerSimpleItemModel(item, this.createFlatItemModel(item, generator), generator.itemModelOutput);
+    }
+
+    private void generateBlockItem(Block block, Identifier id) {
+        this.itemModels.itemModelOutput.accept(
+                block.asItem(),
+                ItemModelUtils.plainModel(id)
+        );
     }
 }

@@ -1,10 +1,13 @@
 package com.github.uocraftteam.uocraft.item;
 
 import com.github.uocraftteam.uocraft.Uocraft;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -34,7 +37,9 @@ public class ModItems {
 
     public static final DeferredItem<@NotNull Item> COFFEE = ITEMS.registerSimpleItem(
             "coffee",
-            properties -> properties);
+            properties -> properties
+                    .stacksTo(16)
+    );
 
 
     public static void registerItems(IEventBus eventBus) {
