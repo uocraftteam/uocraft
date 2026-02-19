@@ -18,11 +18,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Fluids;
 import org.jspecify.annotations.Nullable;
 
 public class CoffeeMachineBlock extends Block {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final EnumProperty<DoubleBlockHalf> HALF =  BlockStateProperties.DOUBLE_BLOCK_HALF;
+    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final IntegerProperty COFFEES_REMAINING = IntegerProperty.create("coffees_remaining", 0, 5);
 
     @Override
@@ -53,9 +54,9 @@ public class CoffeeMachineBlock extends Block {
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && (player.isCreative() || !player.hasCorrectToolForDrops(state, level, pos))) {
-            //TODO prevent drop from bottom part
-
+            preventDropFromBottomPart(level, pos, state, player);
         }
+
         return super.playerWillDestroy(level, pos, state, player);
     }
 
@@ -80,8 +81,21 @@ public class CoffeeMachineBlock extends Block {
     public CoffeeMachineBlock(Block.Properties properties) {
         super(properties);
         this.registerDefaultState(getStateDefinition().any()
-        .setValue(FACING, Direction.NORTH)
+                .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, DoubleBlockHalf.LOWER)
                 .setValue(COFFEES_REMAINING, 5));
+    }
+
+    protected static void preventDropFromBottomPart(Level level, BlockPos pos, BlockState state, Player player) {
+        DoubleBlockHalf doubleblockhalf = (DoubleBlockHalf) state.getValue(HALF);
+        if (doubleblockhalf == DoubleBlockHalf.UPPER) {
+            BlockPos blockpos = pos.below();
+            BlockState blockstate = level.getBlockState(blockpos);
+            if (blockstate.is(state.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                BlockState blockstate1 = blockstate.getFluidState().is(Fluids.WATER) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                level.setBlock(blockpos, blockstate1, 35);
+                level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
+            }
+        }
     }
 }
