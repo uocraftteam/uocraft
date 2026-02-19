@@ -1,6 +1,7 @@
 package com.github.uocraftteam.uocraft.block;
 
 import com.github.uocraftteam.uocraft.Uocraft;
+import com.github.uocraftteam.uocraft.block.custom.CoffeeMachineBlock;
 import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
 import com.github.uocraftteam.uocraft.block.custom.TableBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
@@ -50,6 +51,16 @@ public class ModBlocks {
                     .lightLevel(state -> 2)
                     .noOcclusion()
             ));
+
+    public static final DeferredBlock<Block> COFFEE_MACHINE = registerBlock("coffee_machine",
+            identifier -> new CoffeeMachineBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, identifier))
+                    .destroyTime(1.5f)
+                    .explosionResistance(6.0f)
+                    .sound(SoundType.STONE)
+            ));
+
+
     private static DeferredBlock<@NotNull Block> registerBlock(String name, Function<Identifier, ? extends Block> func){
         DeferredBlock<@NotNull Block> block =  BLOCKS.register(name, func);
         registerBlockItem(name, block);

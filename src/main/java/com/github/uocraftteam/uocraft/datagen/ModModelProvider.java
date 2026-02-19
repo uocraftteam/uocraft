@@ -35,6 +35,9 @@ public class ModModelProvider extends ModelProvider {
         Block eii_block = ModBlocks.EII_BLOCK.get();
         blockModels.blockStateOutput.accept(createSimpleBlock(eii_block,
                 BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(eii_block, blockModels.modelOutput))));
+        blockModels.blockStateOutput.accept(createSimpleBlock(ModBlocks.COFFEE_MACHINE.get(),
+                BlockModelGenerators.plainVariant(TexturedModel.CUBE.create(ModBlocks.COFFEE_MACHINE.get(), blockModels.modelOutput))
+                ));
 
         generateComputerModel(blockModels);
         generateTableModels(blockModels);

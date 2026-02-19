@@ -1,8 +1,10 @@
-// 1.21.11	2026-02-18T21:08:12.6545984	Model Definitions - uocraft
+// 1.21.11	2026-02-19T16:17:33.907224	Model Definitions - uocraft
+f497408347cffa81fd77fbb5bf56a7361d8e3bed assets/uocraft/blockstates/coffee_machine.json
 3a7367cda1a7c0fec1dde1e4e8388ad18e47dd56 assets/uocraft/blockstates/computer.json
 4f509651dd370c766dc9e0a973cce155a798eb94 assets/uocraft/blockstates/eii_block.json
 13c30db61a9f35d2f1ce1cd348fb757d35d1786a assets/uocraft/blockstates/green_seminar_table.json
 89061ea979c0c378681bdbfa3c9ac4d6401cef68 assets/uocraft/items/coffee.json
+36e38884109a6f62f1080092f2f150952a83303f assets/uocraft/items/coffee_machine.json
 b2a4216894040a0a26449c34ab248f394fc93305 assets/uocraft/items/computer.json
 6b7f76e9a2c19933e6869e4720bf162fa44e9e23 assets/uocraft/items/eii_block.json
 58073dba98b55fc33b4ccda629c2489a702bb3ba assets/uocraft/items/green_seminar_table.json
@@ -10,6 +12,7 @@ b2a4216894040a0a26449c34ab248f394fc93305 assets/uocraft/items/computer.json
 7188a181fc5beb8cbdf43df3ebf2aceba76858a8 assets/uocraft/items/monitor.json
 b04cc24b18cf00594f762d3caae11731661bd96e assets/uocraft/items/mouse.json
 d298b3a00670d87aa716afd06a662b01a64e7601 assets/uocraft/items/music_disk_demasiado_java.json
+d54ebfa13c0fc44bbf0b6fb4f783a254c6a42518 assets/uocraft/models/block/coffee_machine.json
 7587b9d47098c19341ec6e5eaed1a766d7a0bd0b assets/uocraft/models/block/eii_block.json
 23395dc1ec3d5adce5736528bc0a0799798b2693 assets/uocraft/models/item/coffee.json
 4603bb6be7ccdac4c6a1edd5bca1116a1a3e038f assets/uocraft/models/item/keyboard.json

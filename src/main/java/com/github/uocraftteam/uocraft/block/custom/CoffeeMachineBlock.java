@@ -24,10 +24,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jspecify.annotations.Nullable;
 
 public class CoffeeMachineBlock extends Block {
-    public CoffeeMachineBlock(Properties p_49795_) {
-        super(p_49795_);
-    }
-    /*
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF =  BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final IntegerProperty COFFEES_REMAINING = IntegerProperty.create("coffees_remaining", 0, 5);
@@ -47,8 +43,7 @@ public class CoffeeMachineBlock extends Block {
         if (pos.getY() < level.getMaxY() - 1 && level.getBlockState(pos.above()).canBeReplaced()) {
             return super.getStateForPlacement(context);
         } else {
-            return null
-
+            return null;
         }
 
     }
@@ -85,6 +80,6 @@ public class CoffeeMachineBlock extends Block {
         this.registerDefaultState(getStateDefinition().any()
         .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, DoubleBlockHalf.LOWER)
-                .setValue(COFFEES_REMAINING, 5);
-    }*/
+                .setValue(COFFEES_REMAINING, 5));
+    }
 }

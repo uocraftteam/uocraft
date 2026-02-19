@@ -21,6 +21,7 @@ public class ModBlockLoot extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.EII_BLOCK.get());
         this.dropSelf(ModBlocks.COMPUTER.get());
         this.dropSelf(ModBlocks.GREEN_SEMINAR_TABLE.get());
+        this.dropSelf(ModBlocks.COFFEE_MACHINE.get());
     }
     @Override
     protected @NonNull Iterable<Block> getKnownBlocks() {
