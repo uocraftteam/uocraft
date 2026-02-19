@@ -1,7 +1,5 @@
 package com.github.uocraftteam.uocraft.block.custom;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -14,7 +12,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -41,7 +38,7 @@ public class CoffeeMachineBlock extends Block {
         Level level = context.getLevel();
 
         if (pos.getY() < level.getMaxY() - 1 && level.getBlockState(pos.above()).canBeReplaced()) {
-            return super.getStateForPlacement(context);
+            return this.defaultBlockState().setValue(FACING, direction);
         } else {
             return null;
         }
@@ -50,30 +47,35 @@ public class CoffeeMachineBlock extends Block {
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.setPlacedBy(level, pos, state, placer, stack);
+        level.setBlockAndUpdate(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER));
     }
 
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && (player.isCreative() || !player.hasCorrectToolForDrops(state, level, pos))) {
-            DoubleBlockHalf half = state.getValue(HALF);
-            if (half == DoubleBlockHalf.UPPER) {
-                BlockPos blockpos = pos.below();
-                BlockState blockstate = level.getBlockState(blockpos);
+            //TODO prevent drop from bottom part
 
-                // Check if the block below is the same block and is the LOWER half
-                if (blockstate.is(state.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
-                    // Flag 35 = (1 | 2 | 32) -> Update neighbors, update clients, and PREVENT DROPS
-                    level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
-                    // Optional: Triggers the block-break sound and particles
-                    level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
-                }
-            }
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
 
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        DoubleBlockHalf half = state.getValue(HALF);
 
+        if (direction.getAxis() == Direction.Axis.Y && (half == DoubleBlockHalf.LOWER) == (direction == Direction.UP)) {
+            if (neighborState.is(this) && neighborState.getValue(HALF) != half) {
+                return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
+            }
+            return Blocks.AIR.defaultBlockState();
+        }
+
+        if (half == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(level, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+
+        return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
+    }
 
     public CoffeeMachineBlock(Block.Properties properties) {
         super(properties);

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "uocraft:block/green_seminar_table",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "uocraft:block/green_seminar_table"
+    },
+    "facing=south": {
+      "model": "uocraft:block/green_seminar_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "uocraft:block/green_seminar_table",
+      "y": 270
+    }
+  }
+}

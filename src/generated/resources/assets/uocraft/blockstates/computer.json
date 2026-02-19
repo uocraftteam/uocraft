@@ -1,0 +1,156 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "uocraft:block/computer_tower"
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_keyboard"
+      },
+      "when": {
+        "facing": "north",
+        "keyboard": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_mouse"
+      },
+      "when": {
+        "facing": "north",
+        "mouse": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_monitor"
+      },
+      "when": {
+        "facing": "north",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_tower",
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_keyboard",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "keyboard": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_mouse",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "mouse": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_monitor",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_tower",
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_keyboard",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "keyboard": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_mouse",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "mouse": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_monitor",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_tower",
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_keyboard",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "keyboard": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_mouse",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "mouse": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "uocraft:block/computer_monitor",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "monitor": "true"
+      }
+    }
+  ]
+}

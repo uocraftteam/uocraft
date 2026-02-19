@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "uocraft:block/eii_block_bottom",
+    "side": "uocraft:block/eii_block_side",
+    "top": "uocraft:block/eii_block_top"
+  }
+}
