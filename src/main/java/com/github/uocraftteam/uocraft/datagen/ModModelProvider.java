@@ -116,7 +116,6 @@ public class ModModelProvider extends ModelProvider {
                                 .select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
                 )
         );
-        registerSimpleFlatItemModel(coffeeMachine.asItem(), itemModels);
     }
 
 
@@ -183,7 +182,6 @@ public class ModModelProvider extends ModelProvider {
         );
 
         blockModels.blockStateOutput.accept(green_seminar_table_generator);
-        BlockStateProvider.simple(green_seminar_table);
     }
 
     public static MultiVariantGenerator createSimpleBlock(Block block, MultiVariant variants) {
@@ -199,15 +197,6 @@ public class ModModelProvider extends ModelProvider {
         };
     }
 
-    public void registerSimpleItemModel(Item item, Identifier model, ItemModelOutput output) {
-        output.accept(item, ItemModelUtils.plainModel(model));
-    }
-    public Identifier createFlatItemModel(Item item, ItemModelGenerators generator) {
-        return ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(item), generator.modelOutput);
-    }
-    public void registerSimpleFlatItemModel(Item item, ItemModelGenerators generator) {
-        this.registerSimpleItemModel(item, this.createFlatItemModel(item, generator), generator.itemModelOutput);
-    }
 
     private void generateBlockItem(Block block, Identifier id) {
         this.itemModels.itemModelOutput.accept(
