@@ -24,6 +24,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class ModModelProvider extends ModelProvider {
@@ -182,7 +183,7 @@ public class ModModelProvider extends ModelProvider {
         );
 
         blockModels.blockStateOutput.accept(green_seminar_table_generator);
-        generateBlockItem(green_seminar_table, green_seminar_id);
+        BlockStateProvider.simple(green_seminar_table);
     }
 
     public static MultiVariantGenerator createSimpleBlock(Block block, MultiVariant variants) {

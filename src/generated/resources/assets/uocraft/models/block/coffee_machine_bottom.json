@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "uocraft:block/coffee_machine_bottom",
+    "east": "uocraft:block/coffee_machine_side",
+    "north": "uocraft:block/coffee_machine_front_bottom",
+    "particle": "uocraft:block/coffee_machine_front_top",
+    "south": "uocraft:block/coffee_machine_side",
+    "up": "uocraft:block/coffee_machine_top",
+    "west": "uocraft:block/coffee_machine_side"
+  }
+}
