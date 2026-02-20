@@ -5,26 +5,19 @@ import com.github.uocraftteam.uocraft.block.ModBlocks;
 import com.github.uocraftteam.uocraft.block.custom.CoffeeMachineBlock;
 import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
-import com.google.errorprone.annotations.Var;
 import net.minecraft.client.data.models.*;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
-import net.minecraft.core.ClientAsset;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.random.Weighted;
-import net.minecraft.util.random.WeightedList;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class ModModelProvider extends ModelProvider {
@@ -90,32 +83,24 @@ public class ModModelProvider extends ModelProvider {
                 top_mapping,
                 blockModels.modelOutput
         );
+        PropertyDispatch.C1<VariantMutator, Integer> coffeesRemaningDispatch = PropertyDispatch.modify(CoffeeMachineBlock.COFFEES_REMAINING);
+        for (int i = 0; i <= CoffeeMachineBlock.MAX_COFFEES; i++) {
+            coffeesRemaningDispatch.select(i, BlockModelGenerators.NOP);
+        }
 
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(
                         coffeeMachine
-                ).with(PropertyDispatch.initial(CoffeeMachineBlock.COFFEES_REMAINING, CoffeeMachineBlock.HALF)
-                                .select(0, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
-                                .select(1, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
-                                .select(2, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
-                                .select(3, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
-                                .select(4, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
-                                .select(5, DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
-                                .select(0, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-                                .select(1, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-                                .select(2, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-                                .select(3, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-                                .select(4, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-                                .select(5, DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-
+                ).with(PropertyDispatch.initial( CoffeeMachineBlock.HALF)
+                                .select(DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
+                                .select(DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
                 ).with(
                         PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
                                 .select(Direction.NORTH, BlockModelGenerators.NOP)
                                 .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
                                 .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
                                 .select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
-                )
-        );
+                ).with(coffeesRemaningDispatch));
     }
 
 

@@ -27,9 +27,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
 public class CoffeeMachineBlock extends Block {
+    public static final int MAX_COFFEES = 5;
+
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    public static final IntegerProperty COFFEES_REMAINING = IntegerProperty.create("coffees_remaining", 0, 5);
+    public static final IntegerProperty COFFEES_REMAINING = IntegerProperty.create("coffees_remaining", 0, MAX_COFFEES);
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
