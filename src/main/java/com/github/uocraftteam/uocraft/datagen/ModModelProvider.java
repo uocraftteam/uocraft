@@ -83,9 +83,9 @@ public class ModModelProvider extends ModelProvider {
                 top_mapping,
                 blockModels.modelOutput
         );
-        PropertyDispatch.C1<VariantMutator, Integer> coffeesRemaningDispatch = PropertyDispatch.modify(CoffeeMachineBlock.COFFEES_REMAINING);
+        PropertyDispatch.C1<VariantMutator, Integer> coffeesRemainingDispatch = PropertyDispatch.modify(CoffeeMachineBlock.COFFEES_REMAINING);
         for (int i = 0; i <= CoffeeMachineBlock.MAX_COFFEES; i++) {
-            coffeesRemaningDispatch.select(i, BlockModelGenerators.NOP);
+            coffeesRemainingDispatch.select(i, BlockModelGenerators.NOP);
         }
 
         blockModels.blockStateOutput.accept(
@@ -100,7 +100,8 @@ public class ModModelProvider extends ModelProvider {
                                 .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
                                 .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
                                 .select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
-                ).with(coffeesRemaningDispatch));
+                ).with(coffeesRemainingDispatch));
+        this.itemModels.generateFlatItem(coffeeMachine.asItem(), ModelTemplates.FLAT_ITEM);
     }
 
 
