@@ -21,6 +21,12 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.NotNull;
 
 public class ModModelProvider extends ModelProvider {
+    public static final PropertyDispatch<VariantMutator> HORIZONTAL_ROTATOR = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+            .select(Direction.NORTH, BlockModelGenerators.NOP)
+            .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
+            .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
+            .select(Direction.EAST, BlockModelGenerators.Y_ROT_90);
+
     BlockModelGenerators blockModels;
     ItemModelGenerators itemModels;
 
@@ -94,12 +100,7 @@ public class ModModelProvider extends ModelProvider {
                 ).with(PropertyDispatch.initial( CoffeeMachineBlock.HALF)
                                 .select(DoubleBlockHalf.UPPER, BlockModelGenerators.variant(new Variant(topId)))
                                 .select(DoubleBlockHalf.LOWER, BlockModelGenerators.variant(new Variant(bottomId)))
-                ).with(
-                        PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
-                                .select(Direction.NORTH, BlockModelGenerators.NOP)
-                                .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
-                                .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
-                                .select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
+                ).with(HORIZONTAL_ROTATOR
                 ).with(coffeesRemainingDispatch));
         this.itemModels.generateFlatItem(coffeeMachine.asItem(), ModelTemplates.FLAT_ITEM);
     }
