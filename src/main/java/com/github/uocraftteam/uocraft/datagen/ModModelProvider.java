@@ -59,23 +59,17 @@ public class ModModelProvider extends ModelProvider {
     private void generateCoffeeMachineModel(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         Block coffeeMachine = ModBlocks.COFFEE_MACHINE.get();
 
-        TextureMapping bottom_mapping = new TextureMapping()
+        TextureMapping common_mapping = new TextureMapping()
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"))
                 .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_bottom"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_bottom"))
                 .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
                 .put(TextureSlot.EAST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
                 .put(TextureSlot.WEST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
                 .put(TextureSlot.UP, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_top"));
-
-        TextureMapping top_mapping = new TextureMapping()
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"))
-                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_bottom"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"))
-                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
-                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
-                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_side"))
-                .put(TextureSlot.UP, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_top"));
+        TextureMapping bottom_mapping = common_mapping.copy()
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_bottom"));
+        TextureMapping top_mapping = common_mapping.copy()
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(ModBlocks.COFFEE_MACHINE.get(), "_front_top"));
 
         Identifier bottomId = ModelTemplates.CUBE.createWithSuffix(
                 coffeeMachine,
