@@ -10,5 +10,7 @@
   "item.uocraft.coffee": "Café",
 
   "item.uocraft.demasiado_java.desc": "La Canción de Java",
-  "item.uocraft.music_disk_demasiado_java": "Demasiado Java"
+  "item.uocraft.music_disk_demasiado_java": "Demasiado Java",
+
+  "entity.ip_teacher.nametag": "Profesor de IP"
 }

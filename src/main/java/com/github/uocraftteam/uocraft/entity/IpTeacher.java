@@ -1,28 +1,42 @@
 package com.github.uocraftteam.uocraft.entity;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.npc.Npc;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.Nullable;
+
+import java.util.List;
 
 public class IpTeacher extends PathfinderMob implements Npc {
+
+    public static final MutableComponent NAME = Component.translatable("entity.ip_teacher.nametag");
+
     public IpTeacher(EntityType<IpTeacher> ipTeacherEntityType, Level level) {
         super(ipTeacherEntityType, level);
-        this.addTag("IP Teacher");
+        this.setCustomName(NAME);
+        this.setCustomNameVisible(true);
     }
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("entity.ip_teacher.nametag");
+        return NAME;
+    }
+
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
+        this.setCustomNameVisible(true);
+        return super.finalizeSpawn(level, difficulty, spawnReason, spawnGroupData);
     }
 
     @Override
@@ -39,6 +53,12 @@ public class IpTeacher extends PathfinderMob implements Npc {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
     }
+
+    @Override
+    public void onSyncedDataUpdated(List<SynchedEntityData.DataValue<?>> dataValues) {
+        super.onSyncedDataUpdated(dataValues);
+    }
+
 
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource damageSource, float ammount) {
