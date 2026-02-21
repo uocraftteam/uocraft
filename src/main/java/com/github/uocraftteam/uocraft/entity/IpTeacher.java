@@ -1,5 +1,6 @@
 package com.github.uocraftteam.uocraft.entity;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,6 +17,12 @@ import net.minecraft.world.level.storage.ValueOutput;
 public class IpTeacher extends PathfinderMob implements Npc {
     public IpTeacher(EntityType<IpTeacher> ipTeacherEntityType, Level level) {
         super(ipTeacherEntityType, level);
+        this.addTag("IP Teacher");
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("entity.ip_teacher.nametag");
     }
 
     @Override
