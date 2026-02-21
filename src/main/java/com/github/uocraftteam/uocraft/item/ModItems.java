@@ -1,13 +1,20 @@
 package com.github.uocraftteam.uocraft.item;
 
+import com.github.uocraftteam.uocraft.Constants;
 import com.github.uocraftteam.uocraft.Uocraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.item.consume_effects.ClearAllStatusEffectsConsumeEffect;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -35,10 +42,16 @@ public class ModItems {
             "monitor",
             properties -> properties);
 
+    public static final Consumable COFFEE_CONSUMABLE = Consumables.defaultDrink().onConsume(
+            new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SPEED,
+                    Constants.COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND,
+                    Constants.COFFEE_SPEED_EFFECT_INTENSITY
+                    ))
+    ).build();
     public static final DeferredItem<@NotNull Item> COFFEE = ITEMS.registerSimpleItem(
             "coffee",
             properties -> properties
-                    .stacksTo(16)
+                    .stacksTo(16).component(DataComponents.CONSUMABLE, COFFEE_CONSUMABLE)
     );
 
 
