@@ -1,6 +1,5 @@
 package com.github.uocraftteam.uocraft;
 
-import com.github.uocraftteam.uocraft.Uocraft;
 import com.github.uocraftteam.uocraft.entity.IpTeacher;
 import com.github.uocraftteam.uocraft.entity.ModEntities;
 import net.neoforged.bus.api.SubscribeEvent;

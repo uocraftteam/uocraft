@@ -1,12 +1,7 @@
 package com.github.uocraftteam.uocraft;
 
-import com.github.uocraftteam.uocraft.Uocraft;
 import com.github.uocraftteam.uocraft.entity.IpTeacherRenderer;
 import com.github.uocraftteam.uocraft.entity.ModEntities;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
-import net.minecraft.client.renderer.entity.PiglinRenderer;
-import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
