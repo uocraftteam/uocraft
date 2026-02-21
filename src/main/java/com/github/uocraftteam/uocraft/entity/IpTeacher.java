@@ -40,7 +40,6 @@ public class IpTeacher extends PathfinderMob implements Npc {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                // THIS LINE IS MANDATORY FOR PATHFINDERMOB
                 .add(Attributes.FOLLOW_RANGE, 32.0D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D);
     }

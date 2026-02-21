@@ -23,7 +23,7 @@ public class IpTeacherRenderer extends HumanoidMobRenderer {
 
     @Override
     public Identifier getTextureLocation(LivingEntityRenderState livingEntityRenderState) {
-        return Identifier.fromNamespaceAndPath("minecraft", "textures/entity/player/slim/steve");
+        return Identifier.fromNamespaceAndPath("minecraft", "textures/entity/player/wide/alex.png");
     }
 
     @Override
