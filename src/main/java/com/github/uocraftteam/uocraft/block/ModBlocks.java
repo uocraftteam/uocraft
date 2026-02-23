@@ -10,6 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -25,12 +26,8 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Uocraft.MODID);
 
     public static final DeferredBlock<@NotNull Block> EII_BLOCK = registerBlock("eii_block", registryName -> new Block(
-            BlockBehaviour.Properties.of()
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE)
                     .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                    .destroyTime(1.5f)
-                    .explosionResistance(6.0f)
-                    .sound(SoundType.STONE)
-                    .lightLevel(state -> 0)
     ));
     public static final DeferredBlock<Block> COMPUTER = registerBlock("computer",
             identifier -> new ComputerBlock(BlockBehaviour.Properties.of()
