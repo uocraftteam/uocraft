@@ -139,6 +139,7 @@ public class ModModelProvider extends ModelProvider {
         }
 
         blockModels.blockStateOutput.accept(computer_generator);
+        this.itemModels.generateFlatItem(computer.asItem(), ModelTemplates.FLAT_ITEM);
     }
 
     private void generateTableModels(BlockModelGenerators blockModels) {
