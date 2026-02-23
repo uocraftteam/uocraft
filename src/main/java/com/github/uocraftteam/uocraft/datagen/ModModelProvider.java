@@ -43,8 +43,6 @@ public class ModModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(createSimpleBlock(eii_block,
                 BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(eii_block, blockModels.modelOutput))));
 
-
-
         generateComputerModel(blockModels);
         generateTableModels(blockModels);
         generateCoffeeMachineModel(blockModels, itemModels);
@@ -98,7 +96,6 @@ public class ModModelProvider extends ModelProvider {
                 ).with(coffeesRemainingDispatch));
         this.itemModels.generateFlatItem(coffeeMachine.asItem(), ModelTemplates.FLAT_ITEM);
     }
-
 
     private void generateComputerModel(@NotNull BlockModelGenerators blockModels) {
         Block computer = ModBlocks.COMPUTER.get();
