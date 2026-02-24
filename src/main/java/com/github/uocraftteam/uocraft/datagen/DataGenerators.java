@@ -39,5 +39,6 @@ public class DataGenerators {
 
         BlockTagsProvider blockTagsProvider = new ModBlockTagProvider(output, provider, Uocraft.MODID);
         event.addProvider(blockTagsProvider);
+        event.createProvider(ModRecipeProvider.Runner::new);
     }
 }
