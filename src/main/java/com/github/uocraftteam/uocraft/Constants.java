@@ -6,12 +6,17 @@ public class Constants {
     /**
      * How many time the speed effect for the coffee item lasts
      */
-    public static final int COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS = 120;
+    public static final int COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS = 90;
+
+    /**
+     * How many time the speed effect for the coffee item lasts
+     */
+    public static final int COFFEE_NIGHT_VISION_EFFECT_DURATION_IN_SECONDS = 300;
 
     /**
      * The intensity for the coffee speed effect
      * <p>
      * The actual in-game effect is 1 + the constant, so a constant of 3 would produce a speed IV effect
      */
-    public static final int COFFEE_SPEED_EFFECT_INTENSITY = 3;
+    public static final int COFFEE_SPEED_EFFECT_INTENSITY = 2;
 }

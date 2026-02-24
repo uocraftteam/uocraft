@@ -51,7 +51,7 @@ public class ModItems {
                             Constants.COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND,
                             Constants.COFFEE_SPEED_EFFECT_INTENSITY
                     ),
-                    new MobEffectInstance(MobEffects.NIGHT_VISION, Constants.COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND)
+                    new MobEffectInstance(MobEffects.NIGHT_VISION, Constants.COFFEE_NIGHT_VISION_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND)
                     )
             ))
     ).build();
