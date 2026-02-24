@@ -20,6 +20,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModItems {
         public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Uocraft.MODID);
 
@@ -43,10 +46,14 @@ public class ModItems {
             properties -> properties);
 
     public static final Consumable COFFEE_CONSUMABLE = Consumables.defaultDrink().onConsume(
-            new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SPEED,
-                    Constants.COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND,
-                    Constants.COFFEE_SPEED_EFFECT_INTENSITY
-                    ))
+            new ApplyStatusEffectsConsumeEffect(new ArrayList<>(List.of(
+                    new MobEffectInstance(MobEffects.SPEED,
+                            Constants.COFFEE_SPEED_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND,
+                            Constants.COFFEE_SPEED_EFFECT_INTENSITY
+                    ),
+                    new MobEffectInstance(MobEffects.NIGHT_VISION, Constants.COFFEE_NIGHT_VISION_EFFECT_DURATION_IN_SECONDS * Constants.TICKS_PER_SECOND)
+                    )
+            ))
     ).build();
     public static final DeferredItem<@NotNull Item> COFFEE = ITEMS.registerSimpleItem(
             "coffee",
