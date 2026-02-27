@@ -1,3 +1,15 @@
-// 1.21.11	2026-02-24T21:19:51.1966544	Uocraft Recipes
+// 1.21.11	2026-02-27T11:34:41.9685605	Uocraft Recipes
 974e0fd3367aee517052ff331e36e1f5bfe2b627 data/uocraft/advancement/recipes/building_blocks/eii_block.json
+7be9290e1dd267adb647fec2555c304a0eb6b0b9 data/uocraft/advancement/recipes/decorations/green_seminar_table.json
+20ccd87d3f3ddcb010006c56870cf96785e85ac7 data/uocraft/advancement/recipes/redstone/coffee_machine.json
+daa5cc049beebae0e550701c9e6d5aa83e5cc473 data/uocraft/advancement/recipes/redstone/computer.json
+94c083e0e85e27557f424c3040ab2a899593073d data/uocraft/advancement/recipes/redstone/keyboard.json
+84844740328dc6031d962e03d3d172e3f99f7c6e data/uocraft/advancement/recipes/redstone/monitor.json
+7e0c44fdaa0af6c7023527b1bda2262c561218a1 data/uocraft/advancement/recipes/redstone/mouse.json
+d1202d07d0845d6457c64215b2eec34cc4b2387b data/uocraft/recipe/coffee_machine.json
+af780873a94eb4ff4437ed3890bfb88954e76984 data/uocraft/recipe/computer.json
 1bf4053df06986201bd2c9529af5baa7b1f3f04c data/uocraft/recipe/eii_block.json
+652fd14b5709a566a679efd632e883bc42d4529e data/uocraft/recipe/green_seminar_table.json
+af25999776014bac1d61218987a0b2476520f2e5 data/uocraft/recipe/keyboard.json
+8eeb96ea51133161534a691c27d0966dba933fa1 data/uocraft/recipe/monitor.json
+9f9f8d9951818c279ba45d735708cbdf3f0fe840 data/uocraft/recipe/mouse.json
