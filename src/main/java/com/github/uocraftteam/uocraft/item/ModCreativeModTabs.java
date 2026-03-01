@@ -31,6 +31,7 @@ public class ModCreativeModTabs {
                                 output.accept(ModBlocks.EII_BLOCK);
                                 output.accept(ModBlocks.GREEN_SEMINAR_TABLE);
                                 output.accept(ModBlocks.COFFEE_MACHINE);
+                                output.accept(ModBlocks.SERVER_BLOCK);
                             })
                     .build()
     );
