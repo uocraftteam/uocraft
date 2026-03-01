@@ -3,18 +3,16 @@ package com.github.uocraftteam.uocraft.block;
 import com.github.uocraftteam.uocraft.Uocraft;
 import com.github.uocraftteam.uocraft.block.custom.CoffeeMachineBlock;
 import com.github.uocraftteam.uocraft.block.custom.ComputerBlock;
+import com.github.uocraftteam.uocraft.block.custom.ServerBlock;
 import com.github.uocraftteam.uocraft.block.custom.TableBlock;
 import com.github.uocraftteam.uocraft.item.ModItems;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -57,6 +55,13 @@ public class ModBlocks {
                     .sound(SoundType.STONE)
             ));
 
+    public static final DeferredBlock<Block> SERVER_BLOCK = registerBlock("server",
+            identifier -> new ServerBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, identifier))
+                    .destroyTime(1.5f)
+                    .explosionResistance(6.0f)
+                    .sound(SoundType.STONE)
+            ));
 
     private static DeferredBlock<@NotNull Block> registerBlock(String name, Function<Identifier, ? extends Block> func){
         DeferredBlock<@NotNull Block> block =  BLOCKS.register(name, func);

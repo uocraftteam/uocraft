@@ -1,6 +1,7 @@
 package com.github.uocraftteam.uocraft;
 
 import com.github.uocraftteam.uocraft.block.ModBlocks;
+import com.github.uocraftteam.uocraft.block.custom.ModBlockEntities;
 import com.github.uocraftteam.uocraft.entity.ModEntities;
 import com.github.uocraftteam.uocraft.item.ModCreativeModTabs;
 import com.github.uocraftteam.uocraft.item.ModItems;
@@ -31,5 +32,6 @@ public class Uocraft {
         ModSounds.registerSounds(modEventBus);
         ModCreativeModTabs.registerCreativeModeTabs(modEventBus);
         ModEntities.registerEntities(modEventBus);
+        ModBlockEntities.registerBlockEntities(modEventBus);
     }
 }
