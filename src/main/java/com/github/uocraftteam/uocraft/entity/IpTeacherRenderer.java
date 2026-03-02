@@ -11,7 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
-public class IpTeacherRenderer extends HumanoidMobRenderer {
+public final class IpTeacherRenderer extends HumanoidMobRenderer {
     public IpTeacherRenderer(EntityRendererProvider.Context context, HumanoidModel model, float shadowRadius) {
         super(context, model, shadowRadius);
     }

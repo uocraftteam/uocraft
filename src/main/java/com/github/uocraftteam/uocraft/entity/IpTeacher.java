@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
-public class IpTeacher extends PathfinderMob implements Npc {
+public final class IpTeacher extends PathfinderMob implements Npc {
 
     public static final MutableComponent NAME = Component.translatable("entity.ip_teacher.nametag");
 

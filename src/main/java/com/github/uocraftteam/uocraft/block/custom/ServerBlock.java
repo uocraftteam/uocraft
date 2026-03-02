@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
 
-public class ServerBlock extends Block implements EntityBlock {
+public final class ServerBlock extends Block implements EntityBlock {
     public ServerBlock(Properties p) {
         super(p);
     }

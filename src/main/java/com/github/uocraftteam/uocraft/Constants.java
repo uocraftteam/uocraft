@@ -1,6 +1,6 @@
 package com.github.uocraftteam.uocraft;
 
-public class Constants {
+public final class Constants {
     public static final int TICKS_PER_SECOND = 20;
 
     /**

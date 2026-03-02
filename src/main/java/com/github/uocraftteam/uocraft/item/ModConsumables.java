@@ -10,7 +10,7 @@ import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModConsumables {
+public final class ModConsumables {
     public static final Consumable COFFEE_CONSUMABLE = Consumables.defaultDrink().onConsume(
             new ApplyStatusEffectsConsumeEffect(new ArrayList<>(List.of(
                     new MobEffectInstance(MobEffects.SPEED,

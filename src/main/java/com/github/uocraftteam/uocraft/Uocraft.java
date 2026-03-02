@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Uocraft.MODID)
-public class Uocraft {
+public final class Uocraft {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "uocraft";
     // Directly reference a slf4j logger

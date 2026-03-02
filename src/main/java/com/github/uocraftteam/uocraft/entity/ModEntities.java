@@ -8,7 +8,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class ModEntities {
+public final class ModEntities {
     public static final DeferredRegister.Entities ENTITY_TYPES =
             DeferredRegister.createEntities(Uocraft.MODID);
 

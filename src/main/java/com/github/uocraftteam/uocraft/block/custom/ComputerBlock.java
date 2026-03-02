@@ -28,7 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
-public class ComputerBlock extends Block {
+public final class ComputerBlock extends Block {
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty MOUSE = BooleanProperty.create("mouse");
     public static final BooleanProperty KEYBOARD = BooleanProperty.create("keyboard");

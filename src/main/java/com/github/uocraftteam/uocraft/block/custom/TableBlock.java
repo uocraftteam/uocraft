@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 import java.awt.*;
 import java.util.Map;
 
-public class TableBlock extends HorizontalDirectionalBlock {
+public final class TableBlock extends HorizontalDirectionalBlock {
 
     public static final VoxelShape NORTH_SHAPE = Block.box(0.0, 15.0, 4.0, 16.0, 16.0, 16.0);
     public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateHorizontal(NORTH_SHAPE);

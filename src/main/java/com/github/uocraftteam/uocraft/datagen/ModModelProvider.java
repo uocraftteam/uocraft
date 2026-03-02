@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.NotNull;
 
-public class ModModelProvider extends ModelProvider {
+public final class ModModelProvider extends ModelProvider {
     public static final PropertyDispatch<VariantMutator> HORIZONTAL_ROTATOR = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
             .select(Direction.NORTH, BlockModelGenerators.NOP)
             .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)

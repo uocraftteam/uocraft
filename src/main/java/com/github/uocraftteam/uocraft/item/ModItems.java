@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
-public class ModItems {
+public final class ModItems {
         public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Uocraft.MODID);
 
         public static final DeferredItem<@NotNull Item> MUSIC_DISK_DEMASIADO_JAVA = ITEMS.registerSimpleItem(

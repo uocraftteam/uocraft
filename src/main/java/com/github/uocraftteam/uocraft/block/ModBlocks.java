@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-public class ModBlocks {
+public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Uocraft.MODID);
 
     public static final DeferredBlock<@NotNull Block> EII_BLOCK = registerBlock("eii_block", registryName -> new Block(

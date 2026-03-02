@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = Uocraft.MODID)
-public class DataGenerators {
+public final class DataGenerators {
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {

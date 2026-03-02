@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class ModDataPackProvider extends DatapackBuiltinEntriesProvider {
+public final class ModDataPackProvider extends DatapackBuiltinEntriesProvider {
 
     public ModDataPackProvider(PackOutput output, CompletableFuture<RegistrySetBuilder.PatchedRegistries> registries, Set<String> modIds) {
         super(output, registries, Set.of(Uocraft.MODID));

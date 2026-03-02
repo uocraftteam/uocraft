@@ -12,7 +12,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 
-public class ModBlockLoot extends BlockLootSubProvider {
+public final class ModBlockLoot extends BlockLootSubProvider {
 
     protected ModBlockLoot(HolderLookup.Provider registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
