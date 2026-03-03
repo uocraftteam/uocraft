@@ -43,6 +43,10 @@ public final class ModModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(createSimpleBlock(eii_block,
                 BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(eii_block, blockModels.modelOutput))));
 
+        Block server_block = ModBlocks.SERVER_BLOCK.get();
+        blockModels.blockStateOutput.accept(createSimpleBlock(server_block,
+                BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM.create(server_block, blockModels.modelOutput))));
+
         generateComputerModel(blockModels);
         generateTableModels(blockModels);
         generateCoffeeMachineModel(blockModels, itemModels);
@@ -99,15 +103,20 @@ public final class ModModelProvider extends ModelProvider {
 
     private void generateComputerModel(@NotNull BlockModelGenerators blockModels) {
         Block computer = ModBlocks.COMPUTER.get();
+
+        Identifier computer_lit_texture = TextureMapping.getBlockTexture(ModBlocks.COMPUTER.get(), "_lit");
+
         Identifier computer_tower_modelLoc = this.modLocation("block/computer_tower");
         Identifier computer_keyboard_modelLoc = this.modLocation("block/computer_keyboard");
         Identifier computer_mouse_modelLoc = this.modLocation("block/computer_mouse");
         Identifier computer_monitor_modelLoc = this.modLocation("block/computer_monitor");
+        Identifier computer_monitor_lit_modelLoc = this.modLocation("block/computer_monitor_lit");
 
         Variant computer_tower = new Variant(computer_tower_modelLoc);
         Variant computer_keyboard = new Variant(computer_keyboard_modelLoc);
         Variant computer_mouse = new Variant(computer_mouse_modelLoc);
         Variant computer_monitor = new Variant(computer_monitor_modelLoc);
+        Variant computer_monitor_lit = new Variant(computer_monitor_lit_modelLoc);
 
         MultiPartGenerator computer_generator = MultiPartGenerator.multiPart(computer);
 
@@ -133,7 +142,17 @@ public final class ModModelProvider extends ModelProvider {
             computer_generator.with(
                     BlockModelGenerators.condition()
                             .term(BlockStateProperties.HORIZONTAL_FACING, direction)
-                            .term(ComputerBlock.MONITOR, true),
+                            .term(ComputerBlock.MONITOR, true)
+                            .term(ComputerBlock.CONNECTED_TO_SERVER, true)
+                    ,
+                    BlockModelGenerators.variant(computer_monitor_lit).with(rotation)
+            );
+            computer_generator.with(
+                    BlockModelGenerators.condition()
+                            .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                            .term(ComputerBlock.MONITOR, true)
+                            .term(ComputerBlock.CONNECTED_TO_SERVER, false)
+                    ,
                     BlockModelGenerators.variant(computer_monitor).with(rotation)
             );
         }

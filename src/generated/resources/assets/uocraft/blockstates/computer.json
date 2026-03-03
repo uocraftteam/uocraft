@@ -28,9 +28,20 @@
     },
     {
       "apply": {
+        "model": "uocraft:block/computer_monitor_lit"
+      },
+      "when": {
+        "connected_to_server": "true",
+        "facing": "north",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "uocraft:block/computer_monitor"
       },
       "when": {
+        "connected_to_server": "false",
         "facing": "north",
         "monitor": "true"
       }
@@ -66,10 +77,22 @@
     },
     {
       "apply": {
+        "model": "uocraft:block/computer_monitor_lit",
+        "y": 180
+      },
+      "when": {
+        "connected_to_server": "true",
+        "facing": "south",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "uocraft:block/computer_monitor",
         "y": 180
       },
       "when": {
+        "connected_to_server": "false",
         "facing": "south",
         "monitor": "true"
       }
@@ -105,10 +128,22 @@
     },
     {
       "apply": {
+        "model": "uocraft:block/computer_monitor_lit",
+        "y": 270
+      },
+      "when": {
+        "connected_to_server": "true",
+        "facing": "west",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "uocraft:block/computer_monitor",
         "y": 270
       },
       "when": {
+        "connected_to_server": "false",
         "facing": "west",
         "monitor": "true"
       }
@@ -144,10 +179,22 @@
     },
     {
       "apply": {
+        "model": "uocraft:block/computer_monitor_lit",
+        "y": 90
+      },
+      "when": {
+        "connected_to_server": "true",
+        "facing": "east",
+        "monitor": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "uocraft:block/computer_monitor",
         "y": 90
       },
       "when": {
+        "connected_to_server": "false",
         "facing": "east",
         "monitor": "true"
       }
