@@ -1,19 +1,22 @@
 package com.github.uocraftteam.uocraft.block.custom;
 
+import com.github.uocraftteam.uocraft.block.ModBlocks;
 import com.github.uocraftteam.uocraft.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Interaction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,6 +36,7 @@ public final class ComputerBlock extends Block {
     public static final BooleanProperty MOUSE = BooleanProperty.create("mouse");
     public static final BooleanProperty KEYBOARD = BooleanProperty.create("keyboard");
     public static final BooleanProperty MONITOR = BooleanProperty.create("monitor");
+    public static final BooleanProperty CONNECTED_TO_SERVER = BooleanProperty.create("connected_to_server");
 
     public static final VoxelShape SHAPE_NORTH = Shapes.or(
             Block.box(0.0,0.0, 2.0, 4.0, 10.0, 14.0)
@@ -72,13 +76,14 @@ public final class ComputerBlock extends Block {
                 .setValue(MOUSE, false)
                 .setValue(KEYBOARD, false)
                 .setValue(MONITOR, false)
+                .setValue(CONNECTED_TO_SERVER, false)
         );
     }
 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(MOUSE).add(KEYBOARD).add(MONITOR);
+        builder.add(FACING).add(MOUSE).add(KEYBOARD).add(MONITOR).add(CONNECTED_TO_SERVER);
     }
 
     @Override
@@ -88,7 +93,8 @@ public final class ComputerBlock extends Block {
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(MOUSE, false)
                 .setValue(KEYBOARD, false)
-                .setValue(MONITOR, false);
+                .setValue(MONITOR, false)
+                .setValue(CONNECTED_TO_SERVER, false);
     }
 
     @Override
@@ -171,5 +177,14 @@ public final class ComputerBlock extends Block {
             }
         }
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())).is(ModBlocks.SERVER_BLOCK)) {
+            state.setValue(CONNECTED_TO_SERVER, true);
+        }
+
+        return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
     }
 }
