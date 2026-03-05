@@ -14,7 +14,7 @@ import java.util.Set;
 
 public final class ModBlockLoot extends BlockLootSubProvider {
 
-    protected ModBlockLoot(HolderLookup.Provider registries) {
+    ModBlockLoot(HolderLookup.Provider registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
